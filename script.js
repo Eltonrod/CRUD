@@ -1,3 +1,27 @@
+//SCRIPT PARA MOSTRA O ID NO CADASTRO
+function idCreate(){
+    var request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+			if(request.readyState === 4) {
+				if(request.status === 200) {
+
+					var objIdCreate = JSON.parse(request.responseText);
+
+					document.getElementById('id-create').innerHTML = "<p'><b>Cód do cliente: </b>" + objIdCreate.idCreate + "</p>";
+					
+				} else {
+	    			alert('Erro: ' +  request.status + ' ' + request.statusText);
+			            }
+			    }
+			}
+			var url = "http://localhost:8079/sistemaCadastro/bd_idCreate.php";
+			
+			request.open('Get', url);
+
+		request.send();
+		return false;
+        }
+
 //SCRIPT PARA NOVOS REGISTROS
 
 function create(){
@@ -106,8 +130,9 @@ function update(){
 	}
 	var url = "http://localhost:8079/sistemaCadastro/bd_update.php";
 	var gravarUpdateId = updateId;
-	console.log('updateId');
+	//console.log('updateId');
 	var registroUpdateNome = document.getElementById('updateNome').value;
+	
 	var gravarUpdateNome = updateNome;
 		if(registroUpdateNome != ""){
 			gravarUpdateNome = registroUpdateNome;
@@ -122,6 +147,7 @@ function update(){
 		if(registroUpdateEmail != ""){
 			gravarUpdateEmail = registroUpdateEmail;
 		}
+
 
 	request.open('Get', url+"?gravarUpdateId="+gravarUpdateId+"&gravarUpdateNome="+gravarUpdateNome+"&gravarUpdateCpf="+gravarUpdateCpf+"&gravarUpdateEmail="+gravarUpdateEmail);
 
